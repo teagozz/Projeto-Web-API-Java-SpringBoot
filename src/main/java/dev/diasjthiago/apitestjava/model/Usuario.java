@@ -10,8 +10,12 @@ public class Usuario {
     @Column(name = "id")
     private Integer id;
 
+
     @Column(name = "nome_completo", length = 200)
     private String nome;
+
+    @Column(name = "username", length = 100, nullable = true)
+    private String username;
 
     @Column(name = "email", length = 100)
     private String email;
@@ -22,6 +26,13 @@ public class Usuario {
     @Column(name = "telefone", length = 15)
     private String telefone;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Integer getId() {
         return id;

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: Api-Test-Java
+
+
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/API-Test-Java"
+    username: postgres
+    password: Anajulia12_
