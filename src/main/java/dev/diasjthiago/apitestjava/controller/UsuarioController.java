@@ -3,6 +3,7 @@ package dev.diasjthiago.apitestjava.controller;
 import dev.diasjthiago.apitestjava.DAO.IUsuario;
 import dev.diasjthiago.apitestjava.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,26 +19,26 @@ public class UsuarioController {
     private IUsuario dao;
 
     @GetMapping
-    public List<Usuario> listaUsuarios() {
-        return (List<Usuario>) dao.findAll();
-    }
+    public ResponseEntity<List<Usuario>> listaUsuarios() {
+        List<Usuario> lista = (List<Usuario>) dao.findAll();
+        return ResponseEntity.status(200).body(lista);
+    } //esse é o padrão do get
 
     @PostMapping
-    public Usuario addUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> addUsuario(@RequestBody Usuario usuario) {
         Usuario usuarioNovo = dao.save(usuario);
-        return usuarioNovo;
+        return ResponseEntity.status(201).body(usuarioNovo);
     }
 
     @PutMapping
-    public Usuario editUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> editUsuario(@RequestBody Usuario usuario) {
         Usuario usuarioNovo = dao.save(usuario);
-        return usuarioNovo;
+        return ResponseEntity.status(201).body(usuarioNovo);
     }
 
     @DeleteMapping("/{id}")
-    public Optional<Usuario> delUsuario (@PathVariable Integer id){
-        Optional<Usuario> usuario = dao.findById(id);
+    public ResponseEntity<?> delUsuario(@PathVariable Integer id) {
         dao.deleteById(id);
-        return usuario;
+        return ResponseEntity.status(204).build();
     }
 }
